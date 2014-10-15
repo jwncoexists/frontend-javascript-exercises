@@ -19,30 +19,16 @@ module.exports.formLetter = function(letter) {
 };
 
 module.exports.canIGet  = function(item, money) {
-  
-  // store the parameters into global variables 
-  var myItem = item;
-  var myMoney = money;
 
   // create an inventoryItem object constructor
-  function inventoryItem(description, price) {
-    this.description = description;
-    this.price = price;
-  };
+  var priceList = {};
 
   // initialize our inventory list
-  var inventoryList = [
-      new inventoryItem('MacBook Air', 999),
-      new inventoryItem('MacBook Pro', 1299),
-      new inventoryItem('Mac Pro', 2499),
-      new inventoryItem('Apple Sticker', 1) 
-  ];
+  priceList['MacBook Air'] = 999;
+  priceList['MacBook Pro'] = 1299;
+  priceList['Mac Pro'] = 2499;
+  priceList['Apple Sticker'] = 1;
 
-  // now check to see if we have the item, and if they can afford it
-  var result = inventoryList.filter( function(obj) {
-    return obj.description == myItem && obj.price <= myMoney;
-  });
-
-  return result.length > 0;
+  return money >= priceList[item];
 
 };
